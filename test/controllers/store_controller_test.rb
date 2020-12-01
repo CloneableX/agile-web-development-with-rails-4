@@ -8,6 +8,7 @@ class StoreControllerTest < ActionController::TestCase
     assert_select '#main .entry', 3
     assert_select 'h3', 'Programming Ruby 1.9'
     assert_select '.price', /(\$|\￥)[,\d]+\.\d\d/
+    assert_equal 1, session[:access_times]
   end
 
 end

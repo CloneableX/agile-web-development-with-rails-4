@@ -4,6 +4,7 @@ module AccessCounter extend ActiveSupport::Concern
     if @access_times.nil?
       @access_times = 0
     end
-    session[:access_times] = @access_times + 1
+    @access_times += 1
+    session[:access_times] = @access_times
   end
 end

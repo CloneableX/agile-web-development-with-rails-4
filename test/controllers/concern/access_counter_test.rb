@@ -5,7 +5,7 @@ class AccessCounterTest < ActionController::TestCase
 
   test "should initialize access times" do
     increase_times
-    assert_equal 0, @access_times
+    assert_equal 1, @access_times
     assert_equal 1, session[:access_times]
   end
 
@@ -13,7 +13,7 @@ class AccessCounterTest < ActionController::TestCase
     access_times = 1
     session[:access_times] = access_times
     increase_times
-    assert_equal access_times, @access_times
+    assert_equal access_times + 1, @access_times
     assert_equal access_times + 1, session[:access_times]
   end
 end

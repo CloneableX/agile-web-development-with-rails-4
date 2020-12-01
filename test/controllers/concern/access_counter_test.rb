@@ -23,4 +23,9 @@ class AccessCounterTest < ActionController::TestCase
     assert_equal 0, @access_times
     assert_equal 0, session[:access_times]
   end
+
+  test "should raise RoutingError when accessed over 5 times" do
+    (0..4).each {increase_times}
+    assert_raise(ActionController::RoutingError) { increase_times }
+  end
 end

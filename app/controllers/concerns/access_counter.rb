@@ -6,6 +6,8 @@ module AccessCounter extend ActiveSupport::Concern
     end
     @access_times += 1
     session[:access_times] = @access_times
+
+    raise ActionController::RoutingError.new('Accessed Times over 5') if @access_times > 5
   end
 
   def reset_times

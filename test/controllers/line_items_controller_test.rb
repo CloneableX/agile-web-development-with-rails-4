@@ -22,6 +22,7 @@ class LineItemsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to cart_path(assigns(:line_item).cart)
+    assert_equal 0, session[:access_times]
   end
 
   test "should show line_item" do

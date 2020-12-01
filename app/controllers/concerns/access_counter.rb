@@ -7,4 +7,9 @@ module AccessCounter extend ActiveSupport::Concern
     @access_times += 1
     session[:access_times] = @access_times
   end
+
+  def reset_times
+    @access_times = 0
+    session[:access_times] = @access_times
+  end
 end

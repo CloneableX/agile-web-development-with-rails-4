@@ -16,4 +16,11 @@ class AccessCounterTest < ActionController::TestCase
     assert_equal access_times + 1, @access_times
     assert_equal access_times + 1, session[:access_times]
   end
+
+  test "should reset access times" do
+    increase_times
+    reset_times
+    assert_equal 0, @access_times
+    assert_equal 0, session[:access_times]
+  end
 end

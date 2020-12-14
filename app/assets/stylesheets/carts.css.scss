@@ -11,4 +11,12 @@
     font-weight: bold;
     border-top: 1px solid #595;
   }
+
+  .item_remove_button {
+    width: 105px;
+
+    form {
+      float: right;
+    }
+  }
 }

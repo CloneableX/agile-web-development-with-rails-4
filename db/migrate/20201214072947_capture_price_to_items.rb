@@ -1,6 +1,6 @@
 class CapturePriceToItems < ActiveRecord::Migration
   def up
-    LineItem.all.each do |item|
+    LineItem.where.not(product_id: nil) do |item|
       product = Product.find(item.product_id)
       item.price = product.price
       item.save!

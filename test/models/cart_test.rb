@@ -17,4 +17,11 @@ class CartTest < ActiveSupport::TestCase
     assert_equal 1, Cart.find(cart.id).line_items.count
     assert_equal 2, current_item.quantity
   end
+
+  test "should capture product price to line item" do
+    product = products(:ruby)
+    cart = Cart.new
+    item = cart.add_product(product.id)
+    assert_equal product.price, item.price
+  end
 end

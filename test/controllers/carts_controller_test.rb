@@ -40,11 +40,25 @@ class CartsControllerTest < ActionController::TestCase
   end
 
   test "should destroy cart" do
-    assert_difference('Cart.count', -1) do
+    assert_difference('Cart.count', 0) do
       session[:cart_id] = @cart.id
       delete :destroy, id: @cart
     end
 
     assert_redirected_to store_path
+    assert_not_nil session[:cart_id]
+
+    line_items = LineItem.where({cart_id: @cart.id})
+    assert line_items.empty?
   end
+
+  test "should destroy cart by ajax" do
+    assert_difference('Cart.count', 0) do
+      session[:cart_id] = @cart.id
+      xhr :delete, :destroy, id: @cart
+    end
+
+    assert_response :success
+  end
+
 end

@@ -3,6 +3,7 @@
 one:
   product_id: 
   cart_id: 
+  quantity: 2
 
 two:
   product_id: 

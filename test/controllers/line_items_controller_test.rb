@@ -41,11 +41,8 @@ class LineItemsControllerTest < ActionController::TestCase
   end
 
   test "should destroy line_item" do
-    cart = Cart.new
-    line_item = cart.add_product(products(:ruby).id)
-    cart.save!
-    assert_difference('LineItem.count', -1) do
-      delete :destroy, id: line_item
+    assert_difference('LineItem.count', 0) do
+      delete :destroy, id: @line_item
     end
 
     assert_redirected_to store_path
@@ -61,4 +58,38 @@ class LineItemsControllerTest < ActionController::TestCase
       assert_select 'tr#current_item td', /Programming Ruby 1.9/
     end
   end
+
+  test "should decrement line_item by ajax" do
+    product_id = products(:ruby).id
+    cart = add_product_to_cart(product_id)
+    line_item = cart.add_product(product_id)
+    line_item.save
+    xhr :delete, :destroy, id: line_item
+
+    assert_response :success
+    assert_select_jquery :html, '#cart' do
+      assert_select 'tr#current_item td', '1×'
+    end
+  end
+
+  test "should hidden cart when all line_items destroyed" do
+    cart = add_product_to_cart(products(:ruby).id)
+    xhr :delete, :destroy, id: cart.line_items.first
+
+    assert_response :success
+    assert_select_jquery :html, '#cart' do
+      assert_select 'tr', 1
+    end
+  end
+
+  private
+
+  def add_product_to_cart(product_id)
+    cart = Cart.new
+    cart.add_product(product_id)
+    cart.save
+    session[:cart_id] = cart.id
+    return cart
+  end
+
 end

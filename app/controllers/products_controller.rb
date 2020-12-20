@@ -69,6 +69,7 @@ class ProductsController < ApplicationController
         format.atom
         format.html
         format.xml
+        format.json
       end
     end
   end

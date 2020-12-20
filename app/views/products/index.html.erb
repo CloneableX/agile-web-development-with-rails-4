@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
 
 <h1>Listing Products</h1>
 
@@ -17,6 +19,7 @@
           <%= link_to 'Show', product %>
           <%= link_to 'Edit', edit_product_path(product) %>
           <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Show Orders', who_bought_product_path(product), method: :get %>
         </td>
       </tr>
     <% end %>

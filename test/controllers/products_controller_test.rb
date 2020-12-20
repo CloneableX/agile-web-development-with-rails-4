@@ -54,4 +54,9 @@ class ProductsControllerTest < ActionController::TestCase
 
     assert_redirected_to products_path
   end
+
+  test "should show html when access who_bought" do
+    get :who_bought, id: @product
+    assert_not_nil assigns(:product)
+  end
 end

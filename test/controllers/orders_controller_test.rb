@@ -46,7 +46,7 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test "should update order" do
-    patch :update, id: @order, order: { address: @order.address, email: @order.email, name: @order.name, pay_type: @order.pay_type }
+    patch :update, id: @order, order: { address: @order.address, email: @order.email, name: @order.name, pay_type_id: pay_types(:one).id }
     assert_redirected_to order_path(assigns(:order))
   end
 

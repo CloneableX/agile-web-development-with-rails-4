@@ -3,7 +3,8 @@ json.updated_at @last_order.try(:updated_at)
 
 json.orders @product.orders do |order|
   json.order do
-    json.(order, :id, :address, :pay_type)
+    json.(order, :id, :address)
+    json.pay_type order.pay_type.name
     json.author do
       json.extract! order, :name, :email
     end

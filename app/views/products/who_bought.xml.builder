@@ -18,6 +18,7 @@ xml.document {
       }
 
       xml.total_price number_to_currency order.line_items.map(&:total_price).sum
+      xml.pay_type order.pay_type.name
 
       xml.author {
         xml.name order.name

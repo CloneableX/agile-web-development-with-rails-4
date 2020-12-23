@@ -2,6 +2,8 @@ require 'test_helper'
 
 class UserStoriesTest < ActionDispatch::IntegrationTest
   fixtures :products
+  fixtures :orders
+
   test "buying a product" do
     LineItem.delete_all
     Order.delete_all
@@ -48,5 +50,30 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
     assert_equal ['hank@customer.com'], mail.to
     assert_equal 'Sam Ruby <depot@example.com>', mail[:from].value
     assert_equal 'Pragmatic Store Order Confirmation', mail.subject
+  end
+
+  test "ship order" do
+    order = orders(:one)
+    order.pay_type = pay_types(:one)
+    order.save!
+    ruby_book = products(:ruby)
+
+    get '/products'
+    assert_response :success
+    assert_template 'index'
+
+    get "/products/#{ruby_book.id}/who_bought"
+    assert_response :success
+    assert_template 'who_bought'
+
+    put "/orders/#{order.id}"
+    assert_response 302
+
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal [order.email], mail.to
+    assert_equal 'Pragmatic Store Order Shipped', mail.subject
+
+    shipped_order = Order.find(order.id)
+    assert_not_nil shipped_order.ship_date
   end
 end

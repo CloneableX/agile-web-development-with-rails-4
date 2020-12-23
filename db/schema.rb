@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201221095624) do
+ActiveRecord::Schema.define(version: 20201223064303) do
 
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20201221095624) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "pay_type_id"
+    t.datetime "ship_date"
   end
 
   add_index "orders", ["pay_type_id"], name: "index_orders_on_pay_type_id"

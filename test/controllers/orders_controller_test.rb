@@ -46,8 +46,14 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test "should update order" do
-    patch :update, id: @order, order: { address: @order.address, email: @order.email, name: @order.name, pay_type_id: pay_types(:one).id }
-    assert_redirected_to order_path(assigns(:order))
+    @order.pay_type = pay_types(:one)
+    @order.save
+    patch :update, id: @order
+    assert_redirected_to products_path
+
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal [@order.email], mail.to
+    assert_equal 'Pragmatic Store Order Shipped', mail.subject
   end
 
   test "should destroy order" do

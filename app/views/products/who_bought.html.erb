@@ -27,4 +27,10 @@
     <span><strong>Name:</strong> <%= order.name %></span>
     <span><strong>Email:</strong> <%= order.email %></span>
   </div>
+  <% if order.ship_date %>
+    <p>Shipped at <%= order.ship_date.strftime("%Y-%m-%d %H:%M:%S") %></p>
+  <% end %>
+  <% unless order.ship_date %>
+    <%= button_to 'Ship', order, method: :put %>
+  <% end %>
 <% end %>

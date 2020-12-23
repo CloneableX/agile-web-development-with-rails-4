@@ -61,4 +61,12 @@ class CartsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should send email when invalid cart happed" do
+    get :show, id: 'Invalid Cart Id'
+
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal ['admin@example.com'], mail.to
+    assert_equal 'Depot Error Report', mail.subject
+  end
+
 end

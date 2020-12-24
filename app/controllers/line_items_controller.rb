@@ -3,6 +3,7 @@ class LineItemsController < ApplicationController
   before_action :set_start, only: [:create, :destroy]
   after_action :reset_times, only: [:create]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authorize, only: [:create, :destroy]
 
   # GET /line_items
   # GET /line_items.json

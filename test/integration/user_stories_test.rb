@@ -3,6 +3,7 @@ require 'test_helper'
 class UserStoriesTest < ActionDispatch::IntegrationTest
   fixtures :products
   fixtures :orders
+  fixtures :users
 
   test "buying a product" do
     LineItem.delete_all
@@ -57,6 +58,14 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
     order.pay_type = pay_types(:one)
     order.save!
     ruby_book = products(:ruby)
+    dave = users(:one)
+
+    get '/login'
+    assert_response :success
+    assert_template 'new'
+
+    post '/login', name: dave.name, password: 'secret'
+    assert_equal dave.id, session[:user_id]
 
     get '/products'
     assert_response :success

@@ -25,6 +25,13 @@
         <li><a href="http://www..../news">News</a></li>
         <li><a href="http://www..../contact">Contact</a></li>
       </ul>
+      <% if session[:user_id] %>
+        <ul>
+          <li><%= link_to 'Orders', orders_path %></li>
+          <li><%= link_to 'Products', products_path %></li>
+          <li><%= link_to 'Users', users_path %></li>
+        </ul>
+      <% end %>
       <div id="date_time"><%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %></div>
     </div>
     <div id="main">

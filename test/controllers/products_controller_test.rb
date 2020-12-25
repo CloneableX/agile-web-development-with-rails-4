@@ -59,4 +59,11 @@ class ProductsControllerTest < ActionController::TestCase
     get :who_bought, id: @product
     assert_not_nil assigns(:product)
   end
+
+  test "should login when list products without authorization" do
+    logout
+    get :index
+
+    assert_redirected_to login_path
+  end
 end

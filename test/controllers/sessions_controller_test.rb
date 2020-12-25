@@ -25,4 +25,11 @@ class SessionsControllerTest < ActionController::TestCase
     assert_equal 'Invalid username/password combination!', flash[:alert]
   end
 
+  test "should login by any username when users empty" do
+    User.delete_all
+    post :create, name: 'dave', password: 'secret'
+
+    assert_equal 1, User.count
+    assert_equal 'dave', User.find(session[:user_id]).name
+  end
 end

@@ -8,8 +8,19 @@ class ApplicationController < ActionController::Base
   protected
 
     def authorize
-      unless User.find_by(id: session[:user_id])
+      unless authorize_non_html or User.find_by(id: session[:user_id])
         redirect_to login_url, notice: 'Please log in.'
+      end   
+    end
+
+  private
+
+    def authorize_non_html
+      if request.format == Mime::HTML
+        return false
+      end
+      authenticate_or_request_with_http_basic('Application') do |name, password|
+        return name == 'dave' && password == 'secret'
       end
     end
 end

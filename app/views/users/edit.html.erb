@@ -1,5 +1,9 @@
 <h1>Editing User</h1>
 
+<% if flash[:alert] %>
+  <p id="notice"><%= flash[:alert] %></p>
+<% end %>
+
 <%= render 'form' %>
 
 <%= link_to 'Show', @user %> |

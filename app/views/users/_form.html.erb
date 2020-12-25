@@ -20,6 +20,12 @@
         <%= f.label :name, 'Name:' %><br>
         <%= f.text_field :name, size: 40 %>
       </div>
+      <% if @edit %>
+        <div class="field">
+          <%= f.label :original_password, 'Original:' %>
+          <%= f.password_field :original_password, size: 40 %>
+        </div>
+      <% end %>
       <div class="field">
         <%= f.label :password, 'Password:' %><br>
         <%= f.password_field :password, size: 40 %>

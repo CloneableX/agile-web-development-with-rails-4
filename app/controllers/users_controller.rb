@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @edit = true
   end
 
   # POST /users
@@ -41,6 +42,11 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
+      unless @user.authenticate(params[:user][:original_password])
+        @edit = true
+        flash[:alert] = 'Invalid Original Password.'
+        format.html { render :edit }
+      end
       if @user.update(user_params)
         format.html { redirect_to users_url, notice: "User #{@user.name} was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
@@ -76,4 +82,4 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :password, :password_confirmation)
     end
-end
+  end

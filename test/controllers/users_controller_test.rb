@@ -34,9 +34,18 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should update user" do
+  test "should update user fail by invalid original password" do
     patch :update, id: @user, user: { name: @user.name, password: 'secret', password_confirmation: 'secret' }
+    assert_template 'edit'
+    assert_equal 'Invalid Original Password.', flash[:alert]
+  end
+
+  test "should update user" do
+    patch :update, id: @user, user: { name: @user.name, password: 'new password', password_confirmation: 'new password', original_password: 'secret'}
     assert_redirected_to users_path
+
+    user = User.find(@user.id)
+    assert user.authenticate('new password')
   end
 
   test "should destroy user" do

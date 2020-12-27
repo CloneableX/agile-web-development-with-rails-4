@@ -61,3 +61,9 @@ es:
         other: "%{count} errores han impedido que este %{model} se guarde"
 
   thanks: "Gracias por su pedido"
+
+  selects:
+    pay_types:
+      check_html: "Cheque"
+      credit_card_html: "Tarjeta de cr&eacute;dito"
+      purchase_order_html: "Orden de compra"

@@ -26,8 +26,7 @@
   </div>
   <div class="field">
     <%= f.label :pay_type, t('.pay_type') %><br>
-    <%= f.collection_select :pay_type_id, PayType.all, :id, :name,
-      prompt: t('.pay_prompt_html') %>
+    <%= f.select :pay_type_id, PayType.all.collect { |pay_type| [t("selects.pay_types.#{pay_type.name.downcase.sub(' ', '_').concat('_html')}"), pay_type.id] }, prompt: t('.pay_prompt_html') %>
   </div>
   <div class="actions">
     <%= f.submit t('.submit') %>

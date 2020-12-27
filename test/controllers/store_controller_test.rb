@@ -17,4 +17,11 @@ class StoreControllerTest < ActionController::TestCase
     assert_select '.entry input[type=submit]', 3
   end
 
+  test "should list products by locale" do
+    get :index, locale: 'es'
+    I18n.locale = 'en'
+
+    assert_equal 1, assigns(:products).size
+    assert_equal products(:java), assigns(:products).first
+  end
 end

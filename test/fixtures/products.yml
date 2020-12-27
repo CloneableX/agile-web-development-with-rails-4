@@ -20,3 +20,18 @@ ruby:
     delivered fast, you should add Ruby to your toolbox.
   image_url: ruby.png
   price: 49.50
+
+java:
+  title: Pragmatic Unit Testing in Java 8 with JUnit
+  description:
+    The Pragmatic Programmers classic is back! Freshly updated for modern
+    software development, <em>Pragmatic Unit Testing in Java 8 With JUnit</em>
+    teaches you how to write and run easily maintained unit tests in JUnit
+    with confidence. You’ll learn mnemonics to help you know what tests to
+    write, how to remember all the boundary conditions, and what the
+    qualities of a good test are. You’ll see how unit tests can pay off by
+    allowing you to keep your system code clean, and you’ll learn how to
+    handle the stuff that seems too tough to test.
+  image_url: ruby.png
+  price: 39.50
+  locale: es

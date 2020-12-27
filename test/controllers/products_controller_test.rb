@@ -15,7 +15,7 @@ class ProductsControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_not_nil assigns(:products)
-    assert_select 'tbody tr', 3
+    assert_select 'tbody tr', Product.count
     assert_select '.list_description dl dt', 'Programming Ruby 1.9'
   end
 

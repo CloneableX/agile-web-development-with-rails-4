@@ -11,6 +11,7 @@ class Product < ActiveRecord::Base
     with: %r{\.(gif|jpg|png)\Z}i,
     message: 'must be a URL for GIF, JPG or PNG image.'
   }
+  validates :locale, inclusion: { in: I18n.available_locales.map(&:to_s), message: "%{value} is not available language" } 
 
   def self.latest
     Product.order(:updated_at).last

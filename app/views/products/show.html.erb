@@ -20,5 +20,10 @@
   <%= @product.price %>
 </p>
 
+<p>
+  <strong>Locale:</strong>
+  <%= LANGUAGES.select { |locale| locale.last == @product.locale }.first.first %>
+</p>
+
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

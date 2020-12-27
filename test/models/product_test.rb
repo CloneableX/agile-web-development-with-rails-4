@@ -67,4 +67,11 @@ class ProductTest < ActiveSupport::TestCase
     assert product.invalid?
     assert_equal ["#{product.title} is least 10 characters"], product.errors[:title]
   end
+
+  test "locale should be included in available language" do
+    product = Product.new(title: 'aaa', description: 'yyy', price: 1, image_url: 'zzz.jpb', locale: 'Invalid Locale')
+
+    assert product.invalid?
+    assert_equal ["Invalid Locale is not available language"], product.errors[:locale]
+  end
 end

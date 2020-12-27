@@ -5,7 +5,7 @@
 <% end %>
   <td><%= line_item.quantity %>&times;</td>
   <td><%= line_item.product.title %></td>
-  <td class="item_price"><%= number_to_currency(line_item.total_price) %></td>
+  <td class="item_price"><%= localized_currency(line_item.total_price) %></td>
   <% unless @send_mail %>
     <td class="item_remove_button"><%= button_to 'Remove Item', line_item, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
   <% end %>
